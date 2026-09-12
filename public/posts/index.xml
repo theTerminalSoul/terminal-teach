@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on Terminal Teach</title>
+		<link>http://localhost:1313/posts/</link>
+		<description>Recent content in Posts on Terminal Teach</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 08 Sep 2026 23:42:51 +0530</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Compress and Archive That Thing.</title>
+				<link>http://localhost:1313/posts/compress-and-archive-that-thing./</link>
+				<pubDate>Tue, 08 Sep 2026 23:42:51 +0530</pubDate>
+				<guid>http://localhost:1313/posts/compress-and-archive-that-thing./</guid>
+				<description>&lt;h1 id=&#34;wait-what-the-hell-is-targz-&#34;&gt;Wait… What the Hell Is &lt;code&gt;.tar.gz&lt;/code&gt;? 📦🗜️&lt;/h1&gt;&#xA;&lt;p&gt;Today we are going to learn about &lt;strong&gt;compressing and archiving files&lt;/strong&gt; in Linux.&lt;/p&gt;&#xA;&lt;p&gt;But wait, Terminal… 🤔&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;What exactly are Compression and Archiving?&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

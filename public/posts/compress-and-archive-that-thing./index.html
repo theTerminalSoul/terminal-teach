@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Compress and Archive That Thing. | Terminal Teach</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Wait… What the Hell Is .tar.gz? 📦🗜️
+Today we are going to learn about compressing and archiving files in Linux.
+But wait, Terminal… 🤔
+What exactly are Compression and Archiving?">
+    <meta name="generator" content="Hugo 0.165.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    <link rel="stylesheet" href="/ananke/css/main.css">
+    <script>
+  (function () {
+    "use strict";
+
+    
+    
+    function revealButtons() {
+      var buttons = document.querySelectorAll(".code-block .code-copy[hidden]");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].hidden = false;
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", revealButtons);
+    } else {
+      revealButtons();
+    }
+
+    function flash(button) {
+      var label = button.querySelector(".code-copy-label");
+      var previous = label ? label.textContent : null;
+      button.classList.add("is-copied");
+      if (label) label.textContent = "Copied";
+      window.setTimeout(function () {
+        button.classList.remove("is-copied");
+        if (label && previous !== null) label.textContent = previous;
+      }, 2000);
+    }
+
+    function legacyCopy(text) {
+      var area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "absolute";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (e) {
+        ok = false;
+      }
+      document.body.removeChild(area);
+      return ok;
+    }
+
+    function copyFrom(button) {
+      var container = button.closest(".code-block");
+      if (!container) return;
+      var pre = container.querySelector("pre");
+      if (!pre) return;
+      var source = pre.querySelector("code") || pre;
+      var text = source.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () { flash(button); },
+          function () { if (legacyCopy(text)) flash(button); }
+        );
+      } else if (legacyCopy(text)) {
+        flash(button);
+      }
+    }
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest(".code-copy");
+      if (button) copyFrom(button);
+    });
+  })();
+</script>
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/compress-and-archive-that-thing./">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/posts/compress-and-archive-that-thing./">
+	<meta property="og:site_name" content="Terminal Teach">
+	<meta property="og:title" content="Compress and Archive That Thing.">
+	<meta property="og:description" content="Wait… What the Hell Is .tar.gz? 📦🗜️ Today we are going to learn about compressing and archiving files in Linux.
+But wait, Terminal… 🤔
+What exactly are Compression and Archiving?">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-09-08T23:42:51+05:30">
+		<meta property="article:modified_time" content="2026-09-08T23:42:51+05:30">
+
+	<meta itemprop="name" content="Compress and Archive That Thing.">
+	<meta itemprop="description" content="Wait… What the Hell Is .tar.gz? 📦🗜️ Today we are going to learn about compressing and archiving files in Linux.
+But wait, Terminal… 🤔
+What exactly are Compression and Archiving?">
+	<meta itemprop="datePublished" content="2026-09-08T23:42:51+05:30">
+	<meta itemprop="dateModified" content="2026-09-08T23:42:51+05:30">
+	<meta itemprop="wordCount" content="1133">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Compress and Archive That Thing.">
+	<meta name="twitter:description" content="Wait… What the Hell Is .tar.gz? 📦🗜️ Today we are going to learn about compressing and archiving files in Linux.
+But wait, Terminal… 🤔
+What exactly are Compression and Archiving?">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-Compress-and-Archive-That-Thing.">
+   
+  
+
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Terminal Teach
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+<main class="pb7" role="main">
+  
+
+  <article class="page-Compress-and-Archive-That-Thing. flex-l mw7 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100"><aside class="instapaper_ignoref b helvetica tracked ttu">
+    <a class="link dim" href="http://localhost:1313/posts/">Posts</a>
+  </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">Compress and Archive That Thing.</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2026-09-08T23:42:51+05:30">September 8, 2026</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><h1 id="wait-what-the-hell-is-targz-">Wait… What the Hell Is <code>.tar.gz</code>? 📦🗜️</h1>
+<p>Today we are going to learn about <strong>compressing and archiving files</strong> in Linux.</p>
+<p>But wait, Terminal… 🤔</p>
+<p><strong>What exactly are Compression and Archiving?</strong></p>
+<h2 id="-archiving">📦 Archiving</h2>
+<p>Let&rsquo;s say you have 10 files:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>file1.txt
+</span></span><span style="display:flex;"><span>file2.txt
+</span></span><span style="display:flex;"><span>file3.txt
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>file10.txt</span></span></code></pre></div>
+  </div><p>And you want to bundle all of them together into <strong>one file</strong>.</p>
+<p>That&rsquo;s where <strong>archiving</strong> comes in.</p>
+<p>Archiving means taking multiple files and directories and putting them together into a <strong>single archive file</strong>.</p>
+<blockquote>
+<p>⚠️ One important thing: an archive is not the same thing as a folder.
+An archive is a file that contains other files and directories.</p>
+</blockquote>
+<p>Archiving <strong>does not necessarily reduce the size</strong> of your files. It mainly <strong>bundles them together</strong>.</p>
+<p>For example:</p>
+<p>You have 10 files, each 10 MB in size:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>10 files × 10 MB = 100 MB</span></span></code></pre></div>
+  </div><p>After archiving them, you might get:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>files.tar → ~100 MB</span></span></code></pre></div>
+  </div><p>The exact size can be slightly different because of metadata and how the archive is created, but <strong>tar itself is not being used to compress the data</strong>.</p>
+<p>Think of it like putting 10 books into <strong>one box</strong> 📦.</p>
+<p>The books didn&rsquo;t become smaller.</p>
+<p>You just put them together.</p>
+<hr>
+<h2 id="-compression">🗜️ Compression</h2>
+<p>Now let&rsquo;s talk about <strong>compression</strong>.</p>
+<p>Compression is the process of reducing the amount of space required to store data.</p>
+<p>For example, imagine you have a 100 MB file and you want to send it somewhere, but the service has a much smaller file-size limit.</p>
+<p>If the data is highly compressible, compression might reduce it significantly.</p>
+<p>For example:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Original:    100 MB
+</span></span><span style="display:flex;"><span>Compressed:   25 MB</span></span></code></pre></div>
+  </div><p>The receiver can then <strong>decompress</strong> the file and get the original data back.</p>
+<blockquote>
+<p>⚠️ Compression does not always reduce a file to a specific size.
+You can&rsquo;t simply tell gzip &ldquo;make this 100 MB file exactly 15 MB.&rdquo;
+The result depends on the data.</p>
+</blockquote>
+<p>And yes, there are different types of compression and different compression algorithms.</p>
+<blockquote>
+<p>How does compression actually work internally?
+That&rsquo;s a topic for another blog. 😎</p>
+</blockquote>
+<hr>
+<h1 id="-so-whats-the-difference">🤔 So What&rsquo;s the Difference?</h1>
+<p>At this point, you might be thinking:</p>
+<p><strong>&ldquo;Terminal, just tell me the difference!&rdquo;</strong></p>
+<p>Easy.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Archiving 📦</th>
+					<th>Compression 🗜️</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Combines files/directories into one archive</td>
+					<td>Reduces the size of data</td>
+			</tr>
+			<tr>
+					<td>Does not primarily focus on reducing size</td>
+					<td>Specifically focuses on reducing size</td>
+			</tr>
+			<tr>
+					<td>Example: <code>tar</code></td>
+					<td>Example: <code>gzip</code></td>
+			</tr>
+			<tr>
+					<td>Think: putting books in one box</td>
+					<td>Think: making the books take less space</td>
+			</tr>
+	</tbody>
+</table>
+<p>And here&rsquo;s the important part:</p>
+<p><strong>We can combine both!</strong></p>
+<p>That&rsquo;s exactly what we commonly do in Linux.</p>
+<hr>
+<h1 id="-how-do-we-do-this-in-linux">🐧 How Do We Do This in Linux?</h1>
+<p>Okay Terminal, now I understand what compression and archiving are.</p>
+<p>But&hellip;</p>
+<p><strong>How do I actually do this in Linux?</strong> 🤔</p>
+<p>Don&rsquo;t worry. It&rsquo;s pretty easy.</p>
+<p>There are several programs available for this, but today we&rsquo;ll focus on:</p>
+<ol>
+<li><code>tar</code> → Archiving 📦</li>
+<li><code>gzip</code> → Compression 🗜️</li>
+</ol>
+<hr>
+<h1 id="-what-is-tar">📦 What is <code>tar</code>?</h1>
+<p><code>tar</code> is a Linux utility used to <strong>create and extract archives</strong>.</p>
+<p>An archive created with <code>tar</code> is commonly called a <strong>tarball</strong>.</p>
+<p>A basic <code>tar</code> command looks like this:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span> archive-name files/directories</span></span></code></pre></div>
+  </div><p>For example:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -cvf files.tar file1.txt file2.txt file3.txt</span></span></code></pre></div>
+  </div><p>Let&rsquo;s break it down:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-c  → create a new archive
+</span></span><span style="display:flex;"><span>-v  → verbose (show what is happening)
+</span></span><span style="display:flex;"><span>-f  → specify the archive filename</span></span></code></pre></div>
+  </div><p>So:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -cvf files.tar file1.txt file2.txt file3.txt</span></span></code></pre></div>
+  </div><p>means:</p>
+<blockquote>
+<p>&ldquo;Hey tar, create (<code>-c</code>) an archive, show me what you&rsquo;re doing (<code>-v</code>), and save it as <code>files.tar</code> (<code>-f</code>).&rdquo;</p>
+</blockquote>
+<p>You can also archive an entire directory:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -cvf my_files.tar my_folder/</span></span></code></pre></div>
+  </div><p>Now <code>my_files.tar</code> contains everything inside <code>my_folder</code>.</p>
+<hr>
+<h1 id="-what-is-gzip">🗜️ What is <code>gzip</code>?</h1>
+<p>Now we have our archive.</p>
+<p>But Terminal&hellip;</p>
+<p><strong>It&rsquo;s still the same size! 😭</strong></p>
+<p>Exactly.</p>
+<p>Remember, <code>tar</code> is primarily for <strong>archiving</strong>, not compression.</p>
+<p>This is where <code>gzip</code> comes in.</p>
+<p><code>gzip</code> is a compression utility that compresses files and reduces their size when the data is compressible.</p>
+<p>The basic command is:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gzip <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span> filename</span></span></code></pre></div>
+  </div><p>For example:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gzip file.txt</span></span></code></pre></div>
+  </div><p>This will create:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>file.txt.gz</span></span></code></pre></div>
+  </div><p>By default, <code>gzip</code> removes the original uncompressed file after successful compression.</p>
+<p>If you want to keep the original file, use:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gzip -k file.txt</span></span></code></pre></div>
+  </div><p>Here are some useful options:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-k  → keep the original file
+</span></span><span style="display:flex;"><span>-d  → decompress
+</span></span><span style="display:flex;"><span>-r  → recursively process files in directories
+</span></span><span style="display:flex;"><span>-l  → display compression information</span></span></code></pre></div>
+  </div><p>To decompress a <code>.gz</code> file:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gzip -d file.txt.gz</span></span></code></pre></div>
+  </div><hr>
+<h1 id="-one-important-thing-about-gzip">⚠️ One Important Thing About <code>gzip</code></h1>
+<p>Here&rsquo;s something you should remember:</p>
+<blockquote>
+<p><strong>gzip works on files, not on directories as a single compressed object.</strong></p>
+</blockquote>
+<p>So if you try to directly gzip a directory, that&rsquo;s not the normal workflow.</p>
+<p>Instead, we first <strong>archive the directory with <code>tar</code></strong>, and then compress the resulting archive.</p>
+<p>And this brings us to the really useful part. 👇</p>
+<hr>
+<h1 id="---archiving-and-compression">📦 + 🗜️ Archiving AND Compression</h1>
+<p>What if I want to archive an entire directory <strong>and</strong> compress it?</p>
+<p>Simple.</p>
+<p>We combine <code>tar</code> and <code>gzip</code>.</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -czvf files.tar.gz my_folder/</span></span></code></pre></div>
+  </div><p>Look at the options:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-c  → create archive
+</span></span><span style="display:flex;"><span>-z  → use gzip compression
+</span></span><span style="display:flex;"><span>-v  → verbose
+</span></span><span style="display:flex;"><span>-f  → specify filename</span></span></code></pre></div>
+  </div><p>So:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -czvf files.tar.gz my_folder/</span></span></code></pre></div>
+  </div><p>means:</p>
+<blockquote>
+<p>&ldquo;Create a tar archive, compress it using gzip, and save it as <code>files.tar.gz</code>.&rdquo;</p>
+</blockquote>
+<p>🔥 Now we&rsquo;re doing both:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>my_folder/
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>   tar
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>  archive
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>  gzip
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>files.tar.gz</span></span></code></pre></div>
+  </div><p>To extract it again:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -xzvf files.tar.gz</span></span></code></pre></div>
+  </div><p>Here:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-x  → extract
+</span></span><span style="display:flex;"><span>-z  → gzip
+</span></span><span style="display:flex;"><span>-v  → verbose
+</span></span><span style="display:flex;"><span>-f  → archive filename</span></span></code></pre></div>
+  </div><hr>
+<h1 id="-what-about--j">🤔 What About <code>-j</code>?</h1>
+<p>You might also see this:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -cjvf files.tar.bz2 my_folder/</span></span></code></pre></div>
+  </div><p>The <code>-j</code> option tells <code>tar</code> to use <strong>bzip2</strong> compression.</p>
+<p>You may also come across:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -cJvf files.tar.xz my_folder/</span></span></code></pre></div>
+  </div><p>Here <code>-J</code> tells <code>tar</code> to use <strong>xz</strong> compression.</p>
+<p>So you can remember it like this:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>.tar       → tar archive
+</span></span><span style="display:flex;"><span>.tar.gz    → tar + gzip
+</span></span><span style="display:flex;"><span>.tar.bz2   → tar + bzip2
+</span></span><span style="display:flex;"><span>.tar.xz    → tar + xz</span></span></code></pre></div>
+  </div><hr>
+<h1 id="-what-is-compression-ratio">📊 What is Compression Ratio?</h1>
+<p>Okay Terminal&hellip;</p>
+<p><strong>What does &ldquo;compression ratio&rdquo; actually mean?</strong> 🤔</p>
+<p>The compression ratio tells us how much smaller the compressed data is compared with the original.</p>
+<p>For example:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Original size:   100 MB
+</span></span><span style="display:flex;"><span>Compressed size: 25 MB</span></span></code></pre></div>
+  </div><p>That&rsquo;s a:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>4:1 compression ratio</span></span></code></pre></div>
+  </div><p>Why?</p>
+<p>Because:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>100 ÷ 25 = 4</span></span></code></pre></div>
+  </div><p>So the original data is <strong>4 times the size</strong> of the compressed data.</p>
+<p>A simple way to think about it:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Original
+</span></span><span style="display:flex;"><span>████████████████████ 100 MB
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Compressed
+</span></span><span style="display:flex;"><span>█████                 25 MB</span></span></code></pre></div>
+  </div><p>However, don&rsquo;t expect every file to achieve a 4:1 ratio.</p>
+<p>A text file might compress very well, while an already-compressed file such as a JPEG or MP4 may barely get smaller.</p>
+<hr>
+<h1 id="-thats-it">🎯 That&rsquo;s It!</h1>
+<p>So now you know the difference between <strong>archiving</strong> and <strong>compression</strong>.</p>
+<p>Remember:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Archiving   → Put multiple files together 📦
+</span></span><span style="display:flex;"><span>Compression → Make data take less space 🗜️</span></span></code></pre></div>
+  </div><p>And Linux lets us combine both:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -czvf archive.tar.gz folder/</span></span></code></pre></div>
+  </div><p>So next time you see something like:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>backup.tar.gz</span></span></code></pre></div>
+  </div><p>you&rsquo;ll know what&rsquo;s happening.</p>
+<p>It&rsquo;s basically:</p>
+<p><strong><code>tar</code> + <code>gzip</code> = archive + compression</strong> 😎</p>
+<p>And that&rsquo;s the basic idea behind compressing and archiving files in Linux.</p><ul class="pa0">
+  
+</ul><ul class="pa0">
+  
+</ul>
+
+      
+    </div></article>
+</main><footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Terminal Teach 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
