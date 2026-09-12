@@ -1,6 +1,6 @@
 +++
 date = '2026-09-08T23:42:51+05:30'
-draft = true
+draft = false
 title = 'Compress and Archive That Thing.'
 +++
 
