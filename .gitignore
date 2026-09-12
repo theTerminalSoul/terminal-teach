@@ -1,0 +1,13 @@
+# Hugo build outputs
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+.hugo_build.lock
+
+# Obsidian local settings & cache
+.obsidian/
+
+# Local server / environment overrides
+.env
+.DS_Store
+Thumbs.db
