@@ -1,6 +1,6 @@
 +++
 date = '2026-09-14T16:11:35+05:30'
-draft = true
+draft = false
 title = 'Regex Is Weird'
 +++
 
